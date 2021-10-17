@@ -17,5 +17,6 @@ class HomeViewModel @Inject constructor(
     val uiState: StateFlow<HomeState> = _uiState
 
     fun handleEvent(event: HomeEvent) {
+
     }
 }

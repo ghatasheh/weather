@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = HomeDirection.Home.destination,
                 ) {
                     composable(HomeDirection.Home.destination) {
-                        HomeScreen(state = HomeState(loading = true))
+                        HomeScreen(state = HomeState(loading = true), events = {})
                     }
                 }
             }

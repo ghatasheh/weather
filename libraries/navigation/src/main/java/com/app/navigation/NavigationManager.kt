@@ -11,4 +11,5 @@ class NavigationManager {
     ) {
         commands.value = directions
     }
+
 }

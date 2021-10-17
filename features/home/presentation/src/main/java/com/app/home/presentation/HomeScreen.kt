@@ -19,6 +19,7 @@ const val TAG_PROGRESS = "progress"
 @Composable
 fun HomeScreen(
     state: HomeState,
+    events: (event: HomeEvent) -> Unit
 ) {
     when {
         state.loading -> {
@@ -42,6 +43,7 @@ fun HomeScreen(
             }
         }
         state.errorMessage != null -> {
+
         }
     }
 }
