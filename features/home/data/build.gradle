@@ -1,5 +1,22 @@
 apply from: "$rootDir/config/module/feature/data.gradle"
 
+android {
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
+    buildTypes {
+        all {
+            buildConfigField("String", "API_KEY", "\"" + localProperties['WEATHER_API_KEY'] + "\"")
+        }
+    }
+}
 dependencies {
     implementation project(path: ':features:home:domain')
+
+    // Network
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.google.code.gson:gson:$gson_version"
 }

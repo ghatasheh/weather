@@ -8,7 +8,7 @@ android {
     compileSdk targets.compileSdk
 
     defaultConfig {
-        applicationId "com.hisham.starterapp"
+        applicationId "com.hisham.weather"
         minSdk targets.minSdk
         targetSdk targets.targetSdk
         versionCode 1
@@ -31,7 +31,7 @@ android {
 
     buildTypes {
         all {
-            buildConfigField "String", "API_URL", "\"https://api.example.com/\""
+            buildConfigField "String", "API_URL", "\"https://api.openweathermap.org/data/2.5/\""
         }
 
         debug {

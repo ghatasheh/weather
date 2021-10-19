@@ -4,6 +4,10 @@ dependencies {
     implementation project(path: ':features:home:data')
     implementation project(path: ':features:home:domain')
 
+    implementation project(path: ':libraries:threading')
+
+    implementation "io.coil-kt:coil-compose:$coil_version"
+
     // UI
     implementation "com.google.android.material:material:$material_version"
 }

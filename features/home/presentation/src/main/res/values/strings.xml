@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="degrees_unit">%d°C</string>
+    <string name="feels_like">Feels like %d</string>
+    <string name="error_message">Something went wrong!</string>
+    <string name="retry">Retry</string>
+</resources>
