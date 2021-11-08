@@ -1,0 +1,5 @@
+ext.targets = [
+        minSdk    : 23,
+        compileSdk: 31,
+        targetSdk : 31,
+]

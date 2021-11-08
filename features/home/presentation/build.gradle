@@ -1,0 +1,9 @@
+apply from: "$rootDir/config/module/feature/presentation.gradle"
+
+dependencies {
+    implementation project(path: ':features:home:data')
+    implementation project(path: ':features:home:domain')
+
+    // UI
+    implementation "com.google.android.material:material:$material_version"
+}

@@ -1,0 +1,5 @@
+apply from: "$rootDir/config/module/feature/data.gradle"
+
+dependencies {
+    implementation project(path: ':features:home:domain')
+}
