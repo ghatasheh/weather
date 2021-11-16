@@ -1,5 +1,27 @@
 apply from: "$rootDir/config/module/base-android.gradle"
 
+android {
+    buildFeatures {
+        viewBinding true
+        compose true
+    }
+
+    kotlinOptions {
+        useIR = true
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+}
+
 dependencies {
 
     implementation "androidx.appcompat:appcompat:$appcompat_version"
@@ -12,5 +34,4 @@ dependencies {
     implementation "androidx.compose.runtime:runtime:$compose_version"
 
     implementation "androidx.activity:activity-compose:$activity_compose"
-
 }

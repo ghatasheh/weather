@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hisham.weather.ui.theme
+package com.hisham.weather.design
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import com.hisham.weather.design.Purple200
+import com.hisham.weather.design.Purple500
+import com.hisham.weather.design.Purple700
+import com.hisham.weather.design.Teal200
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -43,7 +47,10 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun WeatherTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun WeatherTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

@@ -19,18 +19,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.hisham.weather.home.domain.HomeState
-import com.hisham.weather.home.presentation.HomeEvent
+import com.hisham.weather.design.WeatherTheme
 import com.hisham.weather.home.presentation.HomeScreen
 import com.hisham.weather.home.presentation.HomeViewModel
 import com.hisham.weather.navigation.HomeDirection
 import com.hisham.weather.navigation.NavigationManager
-import com.hisham.weather.ui.theme.WeatherTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

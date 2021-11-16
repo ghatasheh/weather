@@ -23,6 +23,8 @@ android {
     }
 
     kotlinOptions {
+        useIR = true
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
 //        allWarningsAsErrors = true
 //        freeCompilerArgs += '-Xexplicit-api=strict'
     }
