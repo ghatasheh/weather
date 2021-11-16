@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -67,16 +66,18 @@ fun HomeScreen(
 @Composable
 fun ComposablePreview() {
 //    ErrorContent {}
-    HomeContent(data = WeatherUiData(
-        cityName = "Dublin",
-        date = "October, 19 - 07:26pm",
-        dayDegrees = 20,
-        nightDegrees = 14,
-        currentDegrees = 18,
-        feelsLike = 21,
-        weatherDescription = "Cloudy",
-        iconUrl = "https://openweathermap.org/img/wn/04n@2x.png"
-    ))
+    HomeContent(
+        data = WeatherUiData(
+            cityName = "Dublin",
+            date = "October, 19 - 07:26pm",
+            dayDegrees = 20,
+            nightDegrees = 14,
+            currentDegrees = 18,
+            feelsLike = 21,
+            weatherDescription = "Cloudy",
+            iconUrl = "https://openweathermap.org/img/wn/04n@2x.png"
+        )
+    )
 }
 
 @Composable

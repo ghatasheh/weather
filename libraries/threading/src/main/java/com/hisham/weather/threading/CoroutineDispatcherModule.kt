@@ -1,4 +1,4 @@
-package com.app.threading
+package com.hisham.weather.threading
 
 import dagger.Module
 import dagger.Provides

@@ -2,10 +2,9 @@ package com.hisham.weather.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.threading.IoDispatcher
 import com.hisham.weather.home.domain.HomeState
 import com.hisham.weather.home.domain.usecases.FetchWeatherUseCase
-import com.hisham.weather.navigation.NavigationManager
+import com.hisham.weather.threading.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +14,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val navigationManager: NavigationManager,
     private val fetchWeatherUseCase: FetchWeatherUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
