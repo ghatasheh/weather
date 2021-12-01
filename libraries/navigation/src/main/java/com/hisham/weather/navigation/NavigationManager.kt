@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class NavigationManager {
 
-    var commands = MutableStateFlow(HomeDirection.Home)
+    var commands = MutableStateFlow(PermissionDirection.Location)
 
     fun navigate(
         directions: NavigationCommand

@@ -16,6 +16,6 @@ class CityNameResolverImpl @Inject constructor(
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses: List<Address> = geocoder.getFromLocation(lat, lng, 1)
 
-        return addresses[0].getAddressLine(0)
+        return addresses[0].adminArea
     }
 }

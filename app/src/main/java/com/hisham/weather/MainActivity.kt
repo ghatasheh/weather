@@ -19,15 +19,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.hisham.weather.design.WeatherTheme
+import com.hisham.weather.design.widgets.MultiplePermissionRequestContent
 import com.hisham.weather.home.presentation.HomeScreen
-import com.hisham.weather.home.presentation.HomeViewModel
 import com.hisham.weather.navigation.HomeDirection
 import com.hisham.weather.navigation.NavigationManager
+import com.hisham.weather.navigation.PermissionDirection
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -45,12 +47,25 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = HomeDirection.Home.destination,
+                    startDestination = PermissionDirection.Location.destination,
                 ) {
+                    composable(PermissionDirection.Location.destination) {
+                        MultiplePermissionRequestContent(
+                            permissions = listOf(
+                                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                            ),
+                            permissionRequestMessage = stringResource(id = R.string.permission_location_request_message),
+                            permissionNotAvailableMessage = stringResource(id = R.string.permission_location_request_denied_message),
+                            navigateToDestination = {
+                                navigationManager.navigate(HomeDirection.Home)
+                            }
+                        )
+                    }
+
                     composable(HomeDirection.Home.destination) {
-                        val vm = hiltViewModel<HomeViewModel>()
                         HomeScreen(
-                            viewModel = vm,
+                            viewModel = hiltViewModel(),
                         )
                     }
                 }

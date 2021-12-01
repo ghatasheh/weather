@@ -100,6 +100,7 @@ private fun ErrorContent(retryCallback: () -> Unit) {
 @Composable
 private fun HomeContent(data: WeatherUiData) {
     Column {
+        Text(text = data.cityName)
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -121,7 +122,7 @@ private fun HomeContent(data: WeatherUiData) {
                     style = MaterialTheme.typography.h3
                 )
                 Text(text = stringResource(R.string.feels_like, data.feelsLike))
-                Text(data.weatherDescription)
+                Text(text = data.weatherDescription)
             }
         }
     }

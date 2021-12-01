@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="permission_location_request_message">Location is important for this app. Please grant the following permissions.</string>
+    <string name="permission_location_request_denied_message">Location permission denied. App need this permission. Please, grant us access on the Settings screen.</string>
 </resources>

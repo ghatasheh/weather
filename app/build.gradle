@@ -103,6 +103,8 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
     implementation "androidx.hilt:hilt-navigation-compose:$compose_hilt_navigation_version"
 
+    implementation "com.google.accompanist:accompanist-permissions:$accompanist"
+
     // Kotlin
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
@@ -117,6 +119,10 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     implementation "com.google.code.gson:gson:$gson_version"
+
+    // Location
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.2-native-mt'
 
     // Test
     testImplementation 'junit:junit:4.+'

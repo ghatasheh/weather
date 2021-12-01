@@ -2,4 +2,9 @@
 <resources>
     <string name="error_message">Something went wrong! Please try again</string>
     <string name="retry">Try again</string>
+    <string name="ok">Ok!</string>
+    <string name="nope">Nope</string>
+    <string name="feature_not_available">Feature not available</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="permission_granted">Permission Granted</string>
 </resources>

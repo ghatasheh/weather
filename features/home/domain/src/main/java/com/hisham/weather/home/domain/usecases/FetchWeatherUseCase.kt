@@ -4,6 +4,7 @@ import com.hisham.weather.home.domain.api.WeatherRepository
 import com.hisham.weather.home.domain.entities.WeatherResponse
 import com.hisham.weather.home.domain.entities.WeatherUiData
 import com.hisham.weather.home.domain.location.CityNameResolver
+import com.hisham.weather.home.domain.location.LocationDelegate
 import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
@@ -14,11 +15,13 @@ class FetchWeatherUseCase @Inject constructor(
 ) {
 
     suspend fun execute(lat: Double, lng: Double): Result<WeatherUiData> {
+        val city = cityNameResolver.cityNameByLatLng(lat, lng)
+
         return when (val response = weatherRepository.fetchWeather(lat, lng)) {
             is WeatherResponse.Success -> Result.success(
                 toUiData(
                     response,
-                    "Dublin"
+                    city,
                 )
             )
             is WeatherResponse.Failure -> Result.failure(Exception(response.error))

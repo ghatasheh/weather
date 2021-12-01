@@ -1,12 +1,9 @@
 apply from: "$rootDir/config/module/feature/data.gradle"
 
 android {
-    def localProperties = new Properties()
-    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
-
     buildTypes {
         all {
-            buildConfigField("String", "API_KEY", "\"" + localProperties['WEATHER_API_KEY'] + "\"")
+            buildConfigField("String", "API_KEY", "\"" + WEATHER_API_KEY + "\"")
         }
     }
 }

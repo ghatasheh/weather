@@ -3,6 +3,7 @@ package com.hisham.weather.home.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hisham.weather.home.domain.HomeState
+import com.hisham.weather.home.domain.location.LocationDelegate
 import com.hisham.weather.home.domain.usecases.FetchWeatherUseCase
 import com.hisham.weather.threading.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val fetchWeatherUseCase: FetchWeatherUseCase,
+    private val locationDelegate: LocationDelegate,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
@@ -22,7 +24,21 @@ class HomeViewModel @Inject constructor(
     val uiState: StateFlow<HomeState> = _uiState
 
     init {
-        handleEvent(HomeEvent.FetchWeather(53.3459353776223, -6.265959414459697))
+        initialise()
+    }
+
+    private fun initialise() {
+        viewModelScope.launch {
+            val location = locationDelegate.getLocation()
+            if (location != null) {
+                load(location.first, location.second)
+            } else {
+                _uiState.value = _uiState.value.build {
+                    errorMessage = "Failed to load location"
+                    loading = false
+                }
+            }
+        }
     }
 
     fun handleEvent(event: HomeEvent) {
