@@ -19,15 +19,18 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import coil.compose.rememberImagePainter
 import com.hisham.weather.home.domain.HomeState
 import com.hisham.weather.home.domain.entities.WeatherUiData
+import kotlinx.coroutines.launch
 
 const val TAG_PROGRESS = "progress"
 
@@ -36,6 +39,7 @@ fun HomeScreen(
     viewModel: HomeViewModel,
 ) {
     val state: HomeState by viewModel.uiState.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 
     when {
         state.loading -> {
@@ -56,7 +60,9 @@ fun HomeScreen(
         }
         state.errorMessage != null -> {
             ErrorContent {
-                viewModel.handleEvent(HomeEvent.FetchWeather())
+                coroutineScope.launch {
+                    viewModel.handleEvent(HomeEvent.FetchWeather())
+                }
             }
         }
     }
