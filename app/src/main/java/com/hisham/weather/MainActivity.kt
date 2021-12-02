@@ -58,6 +58,7 @@ class MainActivity : ComponentActivity() {
                             permissionRequestMessage = stringResource(id = R.string.permission_location_request_message),
                             permissionNotAvailableMessage = stringResource(id = R.string.permission_location_request_denied_message),
                             navigateToDestination = {
+                                navController.popBackStack()
                                 navigationManager.navigate(HomeDirection.Home)
                             }
                         )
@@ -72,7 +73,21 @@ class MainActivity : ComponentActivity() {
 
                 navigationManager.commands.collectAsState().value.also { command ->
                     if (command.destination.isNotEmpty()) {
-                        navController.navigate(command.destination)
+                        navController.navigate(command.destination) {
+                            // Pop up to the start destination of the graph to
+                            // avoid building up a large stack of destinations
+                            // on the back stack as users select items
+                            navController.graph.startDestinationRoute?.let { route ->
+                                popUpTo(route) {
+                                    saveState = true
+                                }
+                            }
+                            // Avoid multiple copies of the same destination when
+                            // re-selecting the same item
+                            launchSingleTop = true
+                            // Restore state when re-selecting a previously selected item
+                            restoreState = true
+                        }
                     }
                 }
             }
