@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class LocationDelegateImpl @Inject constructor(
     private val locationManager: LocationManager,
-)  : LocationDelegate {
+) : LocationDelegate {
 
     override suspend fun getLocation(): Pair<Double, Double>? {
         locationManager.initLocationIfPermissionGranted()

@@ -136,39 +136,39 @@ private fun MultiplePermissionRequestContent_(
         // the permissions for the first time, explain why the feature is needed by the app and
         // allow the user decide if they don't want to see the rationale any more.
         multiplePermissionsState.shouldShowRationale ||
-                !multiplePermissionsState.permissionRequested ->
-        {
-            if (doNotShowRationale) {
-                Text(stringResource(R.string.feature_not_available))
-            } else {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
-                ) {
-                    val revokedPermissionsText = getPermissionsText(
-                        multiplePermissionsState.revokedPermissions
-                    )
-                    Text(permissionRequestMessage)
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Row {
-                        Button(
-                            onClick = {
-                                multiplePermissionsState.launchMultiplePermissionRequest()
+            !multiplePermissionsState.permissionRequested ->
+            {
+                if (doNotShowRationale) {
+                    Text(stringResource(R.string.feature_not_available))
+                } else {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp)
+                    ) {
+                        val revokedPermissionsText = getPermissionsText(
+                            multiplePermissionsState.revokedPermissions
+                        )
+                        Text(permissionRequestMessage)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Row {
+                            Button(
+                                onClick = {
+                                    multiplePermissionsState.launchMultiplePermissionRequest()
+                                }
+                            ) {
+                                Text(stringResource(R.string.ok))
                             }
-                        ) {
-                            Text(stringResource(R.string.ok))
-                        }
-                        Spacer(Modifier.width(8.dp))
-                        Button(onClick = { doNotShowRationale = true }) {
-                            Text(stringResource(R.string.nope))
+                            Spacer(Modifier.width(8.dp))
+                            Button(onClick = { doNotShowRationale = true }) {
+                                Text(stringResource(R.string.nope))
+                            }
                         }
                     }
                 }
             }
-        }
         // If the criteria above hasn't been met, the user denied some permission. Let's present
         // the user with a FAQ in case they want to know more and send them to the Settings screen
         // to enable them the future there if they want to.
@@ -179,8 +179,8 @@ private fun MultiplePermissionRequestContent_(
                 )
                 Text(
                     "$revokedPermissionsText denied. See this FAQ with " +
-                            "information about why we need this permission. Please, grant us " +
-                            "access on the Settings screen."
+                        "information about why we need this permission. Please, grant us " +
+                        "access on the Settings screen."
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Button(onClick = navigateToSettingsScreen) {

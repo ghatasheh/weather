@@ -83,7 +83,6 @@ class LocationManager @Inject constructor(
         }
     }
 
-
     @SuppressLint("MissingPermission")
     private fun requestLocationUpdates() {
         Log.d(TAG, "Starting")

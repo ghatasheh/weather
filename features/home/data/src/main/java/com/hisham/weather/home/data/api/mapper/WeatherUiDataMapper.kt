@@ -6,7 +6,6 @@ import com.hisham.weather.home.domain.entities.WeatherUiData
 import java.text.SimpleDateFormat
 import java.util.Date
 
-
 fun WeatherResponse.Success.toUi(cityName: String): WeatherUiData {
     val weather = current.weather.first()
     val firstDayTemp = daily.first().temp
