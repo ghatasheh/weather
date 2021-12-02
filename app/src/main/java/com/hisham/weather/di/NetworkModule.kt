@@ -15,6 +15,7 @@
  */
 package com.hisham.weather.di
 
+import com.google.gson.Gson
 import com.hisham.weather.BuildConfig
 import com.hisham.weather.ext.addInterceptorIfDebug
 import com.hisham.weather.home.data.api.WeatherApi
@@ -42,11 +43,14 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(client: OkHttpClient): Retrofit {
+    fun provideRetrofit(
+        client: OkHttpClient,
+        gson: Gson,
+    ): Retrofit {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(BuildConfig.API_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
@@ -54,5 +58,11 @@ object NetworkModule {
     @Provides
     fun provideWeatherApi(retrofit: Retrofit): WeatherApi {
         return retrofit.create(WeatherApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGson(): Gson {
+        return Gson()
     }
 }

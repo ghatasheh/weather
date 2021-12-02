@@ -7,7 +7,11 @@ import android.content.pm.PackageManager
 import android.os.Looper
 import android.util.Log
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationAvailability
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await

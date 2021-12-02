@@ -16,16 +16,7 @@ class FetchWeatherUseCase @Inject constructor(
 
     suspend fun execute(lat: Double, lng: Double): Result<WeatherUiData> {
         val city = cityNameResolver.cityNameByLatLng(lat, lng)
-
-        return when (val response = weatherRepository.fetchWeather(lat, lng)) {
-            is WeatherResponse.Success -> Result.success(
-                toUiData(
-                    response,
-                    city,
-                )
-            )
-            is WeatherResponse.Failure -> Result.failure(Exception(response.error))
-        }
+        return weatherRepository.fetchWeather(lat, lng, city)
     }
 
     private fun toUiData(response: WeatherResponse.Success, cityName: String): WeatherUiData =
