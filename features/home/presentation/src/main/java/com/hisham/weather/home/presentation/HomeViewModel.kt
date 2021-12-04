@@ -2,6 +2,7 @@ package com.hisham.weather.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hisham.weather.home.data.api.worker.FetchWeatherScheduler
 import com.hisham.weather.home.domain.HomeState
 import com.hisham.weather.home.domain.location.LocationDelegate
 import com.hisham.weather.home.domain.usecases.FetchWeatherUseCase
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val fetchWeatherUseCase: FetchWeatherUseCase,
     private val locationDelegate: LocationDelegate,
+    private val fetchWeatherScheduler: FetchWeatherScheduler,
     private val dispatchers: CoroutineDispatchers,
 ) : ViewModel() {
 
@@ -28,6 +30,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun initialise() = viewModelScope.launch(dispatchers.main) {
+        fetchWeatherScheduler.schedule()
         val location = withContext(dispatchers.io) {
             locationDelegate.getLocation()
         }

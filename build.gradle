@@ -19,6 +19,11 @@ buildscript {
 
         accompanist = "0.21.3-beta"
 
+        work_version = "2.7.1"
+        work_hilt_version = "1.0.0"
+
+        timber_version = "5.0.1"
+
         constraint_layout_version = "2.1.1"
 
         coroutines_version = '1.5.2'

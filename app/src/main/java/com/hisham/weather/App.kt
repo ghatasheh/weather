@@ -16,7 +16,31 @@
 package com.hisham.weather
 
 import android.app.Application
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
+import com.hisham.weather.utils.NoOpTree
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
+import timber.log.Timber.DebugTree
+import javax.inject.Inject
+
 
 @HiltAndroidApp
-class App : Application()
+class App : Application(), Configuration.Provider {
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    override fun onCreate() {
+        super.onCreate()
+        if (BuildConfig.DEBUG) {
+            Timber.plant(DebugTree())
+        } else {
+            Timber.plant(NoOpTree())
+        }
+    }
+
+    override fun getWorkManagerConfiguration(): Configuration = Configuration.Builder()
+        .setWorkerFactory(workerFactory)
+        .build()
+}

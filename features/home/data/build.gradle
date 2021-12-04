@@ -16,4 +16,12 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     implementation "com.google.code.gson:gson:$gson_version"
+
+    // Work
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "androidx.hilt:hilt-work:$work_hilt_version"
+    kapt "androidx.hilt:hilt-compiler:$work_hilt_version"
+
+    // Utils
+    implementation "com.jakewharton.timber:timber:$timber_version"
 }
