@@ -5,7 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Looper
-import android.util.Log
+import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.LocationAvailability
 import com.google.android.gms.location.LocationCallback
@@ -13,10 +13,13 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
+import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * Class to handle integration with [LocationServices]
+ */
 class LocationManager @Inject constructor(
     @ApplicationContext context: Context,
 ) {
@@ -28,12 +31,15 @@ class LocationManager @Inject constructor(
     private val locationCallback by lazy {
         object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
-                println("Hisham onLocationResult: $locationResult")
-                locationResult?.lastLocation
+                Timber.tag(TAG).d("onLocationResult $locationResult")
+                locationResult?.lastLocation?.let {
+                    Timber.tag(TAG)
+                        .d("onLocationResult lastLocation ${it.latitude} | ${it.longitude}")
+                }
             }
 
             override fun onLocationAvailability(locationAvailability: LocationAvailability) {
-                println("Hisham location available: ${locationAvailability.isLocationAvailable}")
+                Timber.tag(TAG).d("onLocationAvailability $locationAvailability")
             }
         }
     }
@@ -50,6 +56,9 @@ class LocationManager @Inject constructor(
         initLocationIfPermissionGranted()
     }
 
+    /**
+     * Start listening to user location if the location permissions were granted
+     */
     fun initLocationIfPermissionGranted(): Boolean {
         val permGranted = ContextCompat.checkSelfPermission(
             fusedLocationClient.applicationContext,
@@ -64,28 +73,20 @@ class LocationManager @Inject constructor(
         return permGranted
     }
 
-    @SuppressLint("MissingPermission")
+    /**
+     *
+     * @return Last known location for the user
+     */
+    @RequiresPermission(anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"])
     suspend fun getLocation(): Pair<Double, Double>? {
         return fusedLocationClient.lastLocation.await()?.run {
             Pair(latitude, longitude)
         }
     }
 
-    suspend fun location() = suspendCancellableCoroutine<Pair<Double, Double>> {
-        object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
-                println("Hisham onLocationResult: $locationResult")
-            }
-
-            override fun onLocationAvailability(locationAvailability: LocationAvailability) {
-                println("Hisham location available: ${locationAvailability.isLocationAvailable}")
-            }
-        }
-    }
-
     @SuppressLint("MissingPermission")
     private fun requestLocationUpdates() {
-        Log.d(TAG, "Starting")
+        Timber.tag(TAG).d("requestLocationUpdates")
         fusedLocationClient.requestLocationUpdates(
             locationRequest,
             locationCallback,
@@ -94,7 +95,7 @@ class LocationManager @Inject constructor(
     }
 
     private fun removeLocationUpdates() {
-        Log.d(TAG, "Stopping")
+        Timber.tag(TAG).d("removeLocationUpdates")
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 

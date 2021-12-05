@@ -2,6 +2,9 @@ package com.hisham.weather.home.domain
 
 import com.hisham.weather.home.domain.entities.WeatherUiData
 
+/**
+ * Class represents [HomeScreen] state
+ */
 class HomeState(
     val loading: Boolean = false,
     val success: WeatherUiData? = null,

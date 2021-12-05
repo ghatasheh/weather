@@ -60,7 +60,7 @@ fun HomeScreen(
         state.errorMessage != null -> {
             ErrorContent {
                 coroutineScope.launch {
-                    viewModel.handleEvent(HomeEvent.FetchWeather())
+                    viewModel.handleEvent(HomeEvent.FetchWeather)
                 }
             }
         }

@@ -25,6 +25,8 @@ class HomeViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(HomeState(loading = true))
     val uiState: StateFlow<HomeState> = _uiState
 
+    private val locationState = MutableStateFlow(Pair(0.0, 0.0))
+
     init {
         initialise()
     }
@@ -35,7 +37,8 @@ class HomeViewModel @Inject constructor(
             locationDelegate.getLocation()
         }
         if (location != null) {
-            load(location.first, location.second)
+            locationState.value = location
+            load()
         } else {
             _uiState.value = _uiState.value.build {
                 errorMessage = "Failed to load location"
@@ -44,18 +47,22 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Handles UI interactions
+     */
     suspend fun handleEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.FetchWeather -> {
-                load(event.lat, event.lng)
+                load()
             }
         }
     }
 
-    private suspend fun load(lat: Double, lng: Double) = withContext(dispatchers.main) {
+    private suspend fun load() = withContext(dispatchers.main) {
         _uiState.value = _uiState.value.build { loading = true }
 
         val result = withContext(dispatchers.io) {
+            val (lat, lng) = locationState.value
             fetchWeatherUseCase.execute(lat, lng)
         }
 

@@ -1,5 +1,8 @@
 package com.hisham.weather.home.domain.entities
 
+/**
+ * Represents Ui state
+ */
 data class WeatherUiData(
     val cityName: String,
     val date: String,

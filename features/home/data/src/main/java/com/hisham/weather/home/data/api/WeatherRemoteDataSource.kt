@@ -3,6 +3,9 @@ package com.hisham.weather.home.data.api
 import com.hisham.weather.home.domain.entities.WeatherResponse
 import javax.inject.Inject
 
+/**
+ * DataSource class to handle fetching weather data from [WeatherApi]
+ */
 class WeatherRemoteDataSource @Inject constructor(
     private val api: WeatherApi,
 ) {

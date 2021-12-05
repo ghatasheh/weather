@@ -5,6 +5,9 @@ import com.hisham.weather.home.domain.entities.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Interface represents OpenWeather API
+ */
 interface WeatherApi {
 
     @GET("onecall")

@@ -11,13 +11,15 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+/**
+ * Class to help updating weather data every 2-hours
+ */
 class FetchWeatherScheduler @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
 
     /**
-     * Run [FetchWeatherWorker] every 2 hours with 2 hours delay since the first time
-     * will be fetched when the user starts the app.
+     * Run [FetchWeatherWorker] every 2 hours with 2 hours delay to avoid calling the API twice (From Viewmodel and Worker)
      */
     fun schedule() {
         Timber.tag("FetchWeatherScheduler").d("Start scheduling")

@@ -5,6 +5,9 @@ import com.hisham.weather.home.domain.entities.WeatherUiData
 import com.hisham.weather.home.domain.location.CityNameResolver
 import javax.inject.Inject
 
+/**
+ * UseCase to get [WeatherUiData] based on user location
+ */
 class FetchWeatherUseCase @Inject constructor(
     private val weatherRepository: WeatherRepository,
     private val cityNameResolver: CityNameResolver,

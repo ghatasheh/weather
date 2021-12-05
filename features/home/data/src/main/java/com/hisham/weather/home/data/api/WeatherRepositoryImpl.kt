@@ -7,6 +7,9 @@ import com.hisham.weather.home.domain.entities.WeatherUiData
 import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * Implementation of [WeatherRepository]
+ */
 class WeatherRepositoryImpl @Inject constructor(
     private val remoteDataSource: WeatherRemoteDataSource,
     private val localDataSource: WeatherLocalDataSource,

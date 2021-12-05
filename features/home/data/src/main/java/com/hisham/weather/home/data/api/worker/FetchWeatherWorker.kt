@@ -10,6 +10,9 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import timber.log.Timber
 
+/**
+ * Worker to handle fetch user location and weather data
+ */
 @HiltWorker
 class FetchWeatherWorker @AssistedInject constructor(
     @Assisted appContext: Context,
