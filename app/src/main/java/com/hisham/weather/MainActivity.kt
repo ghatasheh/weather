@@ -15,6 +15,7 @@
  */
 package com.hisham.weather
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -50,11 +51,20 @@ class MainActivity : ComponentActivity() {
                     startDestination = PermissionDirection.Location.destination,
                 ) {
                     composable(PermissionDirection.Location.destination) {
-                        MultiplePermissionRequestContent(
-                            permissions = listOf(
+                        val permList = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            listOf(
                                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                                 android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                            ),
+                                android.Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                            )
+                        } else {
+                            listOf(
+                                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                            )
+                        }
+                        MultiplePermissionRequestContent(
+                            permissions = permList,
                             permissionRequestMessage = stringResource(id = R.string.permission_location_request_message),
                             permissionNotAvailableMessage = stringResource(id = R.string.permission_location_request_denied_message),
                             navigateToDestination = {
