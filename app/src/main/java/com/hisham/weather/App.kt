@@ -24,7 +24,6 @@ import timber.log.Timber
 import timber.log.Timber.DebugTree
 import javax.inject.Inject
 
-
 @HiltAndroidApp
 class App : Application(), Configuration.Provider {
 

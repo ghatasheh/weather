@@ -2,7 +2,6 @@ package com.hisham.weather.utils
 
 import timber.log.Timber
 
-
 /**
  * A tree which has empty implementation.
  */
